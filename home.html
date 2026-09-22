@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PointBox Members</title>
+</head>
+<body>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Points</th>
+                <th>Last Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range $ID, $Member := . }}
+                <tr>
+                    <td>{{$ID}}</td>
+                    <td>{{$Member.Name}}</td>
+                    <td>{{$Member.Points}}</td>
+                    <td>{{$Member.LastUpdated}}</td>
+                </tr>
+                {{ end }}
+            </tbody>
+
+        </table>
+    </main>    
+</body>
+</html>
