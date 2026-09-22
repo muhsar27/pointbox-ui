@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -14,16 +15,18 @@ type Member struct {
 }
 
 var members = make(map[int]Member)
+var currentId int = 1
 
 func main() {
 
-	members[1] = Member{"Muhammad", 1500, time.Now().Format("02-01-2006 03:04PM")}
-	members[2] = Member{"Ebuka", 1500, time.Now().Format("02-01-2006 03:04PM")}
-
+	//members[1] = Member{"Muhammad", 1500, time.Now().Format("02-01-2006 03:04PM")}
+	//members[2] = Member{"Ebuka", 1500, time.Now().Format("02-01-2006 03:04PM")}
 
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /", home)
+	mux.HandleFunc("GET /add", addMember)
+	mux.HandleFunc("POST /add", addMemberPost)
 
 	log.Println("Server starting in 5...4...3...2...1")
 
@@ -47,4 +50,33 @@ func home(w http.ResponseWriter, r *http.Request) {
 	}
 	//show members
 
+}
+
+func addMember(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("./addmember.html")
+
+	if err != nil {
+		log.Print(err.Error())
+		return
+	}
+
+	err = tmpl.Execute(w, nil)
+	if err != nil {
+		log.Print(err.Error())
+		return
+	}
+}
+
+func addMemberPost(w http.ResponseWriter, r *http.Request) {
+	name := r.FormValue("name")
+	point, err := strconv.Atoi(r.FormValue("point"))
+	if err != nil {
+		http.Error(w, "Bad Request", http.StatusBadRequest)
+		return
+	}
+
+	members[currentId] = Member{name, point, time.Now().Format("02-01-2006 03:04PM")}
+	currentId++
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
