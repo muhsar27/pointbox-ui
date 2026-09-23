@@ -84,7 +84,7 @@ func addMemberPost(w http.ResponseWriter, r *http.Request) {
 }
 
 func addPoint(w http.ResponseWriter, r *http.Request) {
-
+	log.Println("Request received")
 	id, err := strconv.Atoi(r.PathValue("ID"))
 
 	if err != nil {
@@ -103,5 +103,6 @@ func addPoint(w http.ResponseWriter, r *http.Request) {
 	user.Points += 10
 	user.LastUpdated = time.Now().Format("02-01-2006 03:04PM")
 
+	members[id] = user
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
