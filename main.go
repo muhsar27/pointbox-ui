@@ -27,8 +27,9 @@ func main() {
 	mux.HandleFunc("GET /", home)
 	mux.HandleFunc("GET /add", addMember)
 	mux.HandleFunc("POST /add", addMemberPost)
+	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
-	log.Println("Server starting in 5...4...3...2...1")
+	log.Println("Server starting in http://localhost:5000")
 
 	err := http.ListenAndServe(":5000", mux)
 	log.Fatal(err)

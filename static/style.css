@@ -1,0 +1,36 @@
+body{
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+
+}
+.add-member-btn{
+    border:none;
+    padding: 6px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    /* font-weight: bold; */
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+}
+
+table{
+    border: solid 1px;
+
+}
+
+th{
+    
+    border: solid 1px;
+    background-color: grey;
+}
+
+.add-point-btn{
+    background-color: green;
+}
+.delete-point-btn{
+     background-color: red;
+}

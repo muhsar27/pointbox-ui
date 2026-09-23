@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PointBox Members</title>
+    <link rel="stylesheet" href="/static/style.css">
+    
 </head>
 <body>
     <main>
-        <a href="/add">Add member</a>
+        <a class="add-member-btn" href="/add">Add member</a>
         <table>
             <thead>
                 <tr>
@@ -22,10 +24,10 @@
                 <tr>
                     <td>{{$ID}}</td>
                     <td>{{$Member.Name}}</td>
-                    <td>{{$Member.Points}}</td>
+                    <td >{{$Member.Points}}</td>
                     <td>{{$Member.LastUpdated}}</td>
-                    <td><button>Add points</button></td>
-                    <td><button>Delete points</button></td>
+                    <td ><button class="add-point-btn">Add points</button></td>
+                    <td ><button class="delete-point-btn">Delete points</button></td>
 
                 </tr>
                 {{ end }}
