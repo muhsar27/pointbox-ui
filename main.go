@@ -27,6 +27,7 @@ func main() {
 	mux.HandleFunc("GET /", home)
 	mux.HandleFunc("GET /add", addMember)
 	mux.HandleFunc("POST /add", addMemberPost)
+	mux.HandleFunc("POST /add/points/{ID}", addPoint)
 	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
 	log.Println("Server starting in http://localhost:5000")
@@ -78,6 +79,29 @@ func addMemberPost(w http.ResponseWriter, r *http.Request) {
 
 	members[currentId] = Member{name, point, time.Now().Format("02-01-2006 03:04PM")}
 	currentId++
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func addPoint(w http.ResponseWriter, r *http.Request) {
+
+	id, err := strconv.Atoi(r.PathValue("ID"))
+
+	if err != nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	_, ok := members[id]
+
+	if !ok {
+		http.NotFound(w, r)
+		return
+	}
+
+	user := members[id]
+	user.Points += 10
+	user.LastUpdated = time.Now().Format("02-01-2006 03:04PM")
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
