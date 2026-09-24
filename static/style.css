@@ -29,6 +29,12 @@ th{
     background-color: grey;
 }
 
+.add-member-form{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .add-point-btn{
     background-color: green;
     color: white;
@@ -36,4 +42,22 @@ th{
 .delete-point-btn{
      background-color: red;
      color: white;
+}
+
+.add-member-btn-submit {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+.cancel-btn{
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    text-decoration: none;
+    text-align: center;
 }

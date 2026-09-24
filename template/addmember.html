@@ -3,19 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Add new member</title>
+	<link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 <main>
-	<form action="/add" method="POST">
+	<form class="add-member-form" action="/add" method="POST">
 		<label for="name">Name</label>
 		<input type="text" id="name" name="name">
 
 		<label for="point">Point</label>
-		<input type="number" id="point" name="point">
+		<input type="number" id="point" name="point"> 
 
-		<button type="submit">Add member</button>
+		<button class="add-member-btn-submit" type="submit">Add member</button>
+		<a class="cancel-btn" href="/">Cancel</a>
 	</form>
-	<a href="/">Cancel</a>
+	
 </main>
 </body>
 </html>
