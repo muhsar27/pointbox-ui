@@ -31,7 +31,9 @@ th{
 
 .add-point-btn{
     background-color: green;
+    color: white;
 }
 .delete-point-btn{
      background-color: red;
+     color: white;
 }

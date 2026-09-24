@@ -38,7 +38,7 @@ func main() {
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("./home.html")
+	tmpl, err := template.ParseFiles("./template/home.html")
 
 	if err != nil {
 		log.Print(err.Error())
@@ -55,7 +55,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 func addMember(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("./addmember.html")
+	tmpl, err := template.ParseFiles("./template/addmember.html")
 
 	if err != nil {
 		log.Print(err.Error())
