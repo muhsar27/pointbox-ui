@@ -28,6 +28,7 @@ func main() {
 	mux.HandleFunc("GET /add", addMember)
 	mux.HandleFunc("POST /add", addMemberPost)
 	mux.HandleFunc("POST /add/points/{ID}", addPoint)
+	mux.HandleFunc("POST /delete/points/{ID}", deletePoint)
 	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
 	log.Println("Server starting in http://localhost:5000")
@@ -84,7 +85,7 @@ func addMemberPost(w http.ResponseWriter, r *http.Request) {
 }
 
 func addPoint(w http.ResponseWriter, r *http.Request) {
-	log.Println("Request received")
+	// log.Println("Request received")
 	id, err := strconv.Atoi(r.PathValue("ID"))
 
 	if err != nil {
@@ -104,5 +105,28 @@ func addPoint(w http.ResponseWriter, r *http.Request) {
 	user.LastUpdated = time.Now().Format("02-01-2006 03:04PM")
 
 	members[id] = user
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func deletePoint(w http.ResponseWriter, r *http.Request) {
+	log.Println("Request received")
+	id, err := strconv.Atoi(r.PathValue("ID"))
+
+	if err != nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	user, ok := members[id]
+
+	if !ok {
+		http.NotFound(w, r)
+		return
+	}
+
+	user.Points -= 10
+	user.LastUpdated = time.Now().Format("02-01-2006 03:04PM")
+	members[id] = user
+
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }

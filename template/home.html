@@ -1,43 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PointBox Members</title>
-    <link rel="stylesheet" href="/static/style.css">
-    
-</head>
-<body>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
     <main>
-        <a class="add-member-btn" href="/add">Add member</a>
-        <table>
-            <thead>
-                <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Points</th>
-                <th>Last Updated</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{ range $ID, $Member := . }}
-                <tr>
-                    <td>{{$ID}}</td>
-                    <td>{{$Member.Name}}</td>
-                    <td >{{$Member.Points}}</td>
-                    <td>{{$Member.LastUpdated}}</td>
-                    <td>
-                        <form action="/add/points/{{$ID}}" method="POST">
-                        <button class="add-point-btn">Add points </button>
-                        </form>
-                    </td>
-                    <td ><button class="delete-point-btn">Delete points</button></td>
-
-                </tr>
-                {{ end }}
-            </tbody>
-
-        </table>
-    </main>    
-</body>
+      <a class="add-member-btn" href="/add">Add member</a>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Points</th>
+            <th>Last Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range $ID, $Member := . }}
+          <tr>
+            <td>{{$ID}}</td>
+            <td>{{$Member.Name}}</td>
+            <td>{{$Member.Points}}</td>
+            <td>{{$Member.LastUpdated}}</td>
+            <td>
+              <form action="/add/points/{{$ID}}" method="POST">
+                <button class="add-point-btn">Add points</button>
+              </form>
+            </td>
+            <td>
+              <form action="/delete/points/{{$ID}}" method="POST">
+                <button class="delete-point-btn">Delete points</button>
+              </form>
+            </td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </main>
+  </body>
 </html>
