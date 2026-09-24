@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -29,6 +30,7 @@ func main() {
 	mux.HandleFunc("POST /add", addMemberPost)
 	mux.HandleFunc("POST /add/points/{ID}", addPoint)
 	mux.HandleFunc("POST /delete/points/{ID}", deletePoint)
+	mux.HandleFunc("POST /delete", deleteMember)
 	mux.Handle("GET /static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 
 	log.Println("Server starting in http://localhost:5000")
@@ -129,4 +131,9 @@ func deletePoint(w http.ResponseWriter, r *http.Request) {
 	members[id] = user
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func deleteMember(w http.ResponseWriter, r *http.Request) {
+
+	fmt.Println(r.Form)
 }
