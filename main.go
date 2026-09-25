@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -134,6 +133,17 @@ func deletePoint(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteMember(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
 
-	fmt.Println(r.Form)
+	deleteForm := r.Form
+	ids := deleteForm["ID"]
+	for _, j := range ids {
+		num, err := strconv.Atoi(j)
+		if err != nil {
+			continue
+		}
+
+		delete(members, num)
+	}
+	http.Redirect(w, r, "/", http.StatusSeeOther)
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <form id="delete-member" action="delete" method="POST">
+    <form id="delete-member" action="delete" method="POST"></form>
         <main>
         <a class="add-member-btn" href="/add">Add member</a>
         <table>
@@ -23,7 +23,7 @@
             <tbody>
             {{ range $ID, $Member := . }}
             <tr>
-                <td><input type="checkbox" name="ID" value="{{$ID}}"></td>
+                <td><input type="checkbox" form="delete-member" name="ID" value="{{$ID}}"></td>
                 <td>{{$ID}}</td>
                 <td>{{$Member.Name}}</td>
                 <td>{{$Member.Points}}</td>
@@ -42,8 +42,8 @@
             {{ end }}
             </tbody>
         </table>
-        <input type="submit" for="delete-member" value="Delete Member(s)">
+        <input type="submit" form="delete-member" value="Delete Member(s)">
         </main>
-    </form>
+ 
   </body>
 </html>
