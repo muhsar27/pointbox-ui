@@ -1,11 +1,14 @@
 package main
 
 import (
+	"flag"
 	"html/template"
 	"log"
 	"net/http"
 	"strconv"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Member struct {
@@ -21,6 +24,16 @@ func main() {
 
 	//members[1] = Member{"Muhammad", 1500, time.Now().Format("02-01-2006 03:04PM")}
 	//members[2] = Member{"Ebuka", 1500, time.Now().Format("02-01-2006 03:04PM")}
+
+	dsn := flag.String("dsn", "web:1234@/pointbox_ui?parseTime=true", "MySQL data source name")
+	flag.Parse()
+
+	db, err := openDB(*dsn)
+	if err != nil {
+		log.Fatal("failed to connect to the database", err)
+	}
+
+	defer db.Close()
 
 	mux := http.NewServeMux()
 
